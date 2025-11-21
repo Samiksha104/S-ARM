@@ -61,7 +61,7 @@ const ChevronRight = ({ size = 24, className = '' }) => (
     )
 );
 
-const API_BASE_URL = 'http://192.168.29.191:3000/api/sarm';
+const API_BASE_URL = 'https://s-arm.onrender.com';
 const SERVO_LABELS = ['Rotate', 'Link 1', 'Link 2', 'Holder', 'Gripper'];
 const RESET_ANGLE = 90;
 const INITIAL_ANGLES = SERVO_LABELS.map(() => RESET_ANGLE);

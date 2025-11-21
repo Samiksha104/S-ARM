@@ -93,13 +93,17 @@ app.get('/api/sarm/fetch/arm', (req, res) => {
 // 3. HTML Serving (For Frontend Web Page)
 // ===========================================
 
-// When a browser hits the base URL (http://IP:3000), send the index.html file.
-// 1. Tell Express to look inside the 'frontend' folder for static assets
+// 1. Serve static assets (JS, CSS, etc.) from the frontend's build folder
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// 3. For any unknown request, serve the main index.html (handles React client-side routing)
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+// 2. Fallback: For any request not handled by the APIs or static files, 
+//    always serve the index.html file. This is crucial for React Router.
+app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api')) {
+        res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+    } else {
+        next();
+    }
 });
 
 

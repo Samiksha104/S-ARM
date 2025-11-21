@@ -95,12 +95,11 @@ app.get('/api/sarm/fetch/arm', (req, res) => {
 
 // When a browser hits the base URL (http://IP:3000), send the index.html file.
 // 1. Tell Express to look inside the 'frontend' folder for static assets
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// 2. Route the root '/' to the index.html file inside 'frontend'
-app.get('/', (req, res) => {
-    // Note the added '../frontend/' directory in the path
-    res.sendFile(path.join(__dirname, '../frontend/app.js'));
+// 3. For any unknown request, serve the main index.html (handles React client-side routing)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
 

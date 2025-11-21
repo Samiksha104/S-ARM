@@ -9,7 +9,8 @@ const express = require('express');
 const cors = require('cors'); 
 const path = require('path'); 
 const app = express();
-const PORT = 3000;
+// CRITICAL CHANGE: Use the port provided by the hosting environment (process.env.PORT), or default to 3000 for local testing.
+const PORT = process.env.PORT || 3000;
 
 // --- Configuration Constants ---
 const MIN_ANGLE = 0;
